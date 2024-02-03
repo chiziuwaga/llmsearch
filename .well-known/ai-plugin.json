@@ -13,7 +13,7 @@
     },
     "api": {
 	"type": "openapi",
-	"url": "https://tuuyi.io/openapi.yaml",
+	"url": "https://northamerica-northeast1-gensrch.cloudfunctions.net/srch-2",
 	"is_user_authenticated": false
     },
     "logo_url": "https://tuuyi.io/logo.png",
