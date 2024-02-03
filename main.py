@@ -10,7 +10,7 @@ import requests
 app = quart_cors.cors(quart.Quart(__name__), allow_origin="*")
 
 # This key can be anything, though you will likely want a randomly generated sequence.
-_SERVICE_AUTH_KEY = "0123456788abcdef"
+_SERVICE_AUTH_KEY = "f3b8c1a5e6d74902"
 
 # def assert_auth_header(req):
 #    assert req.headers.get(
