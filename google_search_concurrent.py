@@ -274,7 +274,7 @@ def search(query_phrase):
     try:
         start_wall_time = time.time()
         url = (
-            "https://www.googleapis.com/customsearch/v1?key="
+            "https://cse.google.com/cse?cx=05c2e1a837ffb4411"
             + ut.google_key
             + "&cx="
             + ut.google_cx
