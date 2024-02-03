@@ -1,19 +1,21 @@
+import openai
 import requests
 import json
-import openai
 import sys
 import os
 import socket
 import time
 import string
 import webbrowser
+import pyreadline
+from openai import OpenAI
 
 # from urllib.request import urlopen
 from datetime import date
 from datetime import datetime
 import traceback
 import random
-import readline as rl
+import pyreadline as rl
 import concurrent.futures
 import google_search_concurrent as gs
 import utilityV2 as ut
@@ -99,7 +101,7 @@ def illustrate(text):
     ]
     img_completion = None
     img_completion = ut.completions_with_backoff(
-        model="gpt-3.5-turbo",
+        model="gpt-4",
         messages=img_gpt_message,
         max_tokens=64,
         temperature=0.1,
