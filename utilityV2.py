@@ -11,19 +11,21 @@ import tracemalloc
 import os
 import linecache
 import nltk
+from openai import OpenAI
+
 
 # from tenacity import (retry,stop_after_attempt,stop_after_delay, wait_random_exponential)
 from tenacity import *
 import selenium
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
-google_key = os.getenv("GOOGLE_KEY")
-google_cx = os.getenv("GOOGLE_CX")
+openai.api_key = os.getenv("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")
+google_key = os.getenv("AIzaSyAgrsVgr95fL3DjceZnkc0cn8LbzEkFcVE")
+google_cx = os.getenv("05c2e1a837ffb4411")
 GOOGLE = "google"
 USER = "user"
 ASSISTANT = "assistant"
 
-MODEL = "gpt-3.5-turbo"
+MODEL = "gpt-4"
 
 sites = {}  # initialize dictionay or sites used
 new_sites = {}  # initialize dictionay or sites used
