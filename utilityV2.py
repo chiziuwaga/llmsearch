@@ -12,15 +12,26 @@ import os
 import linecache
 import nltk
 from openai import OpenAI
+from dotenv import load_dotenv
+import os
+client = OpenAI(api_key= "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")
+
+# openai.api_key = "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"
+google_key = os.getenv("GOOGLE_KEY")
+google_cx = os.getenv("GOOGLE_CX")
+
+
+chat_completion = client.chat.completions.create(
+    model="gpt-4-turbo-preview",
+    messages=[{"role": "user", "content": "Hello world"}]
+)
 
 
 # from tenacity import (retry,stop_after_attempt,stop_after_delay, wait_random_exponential)
 from tenacity import *
 import selenium
 
-openai.api_key = os.getenv("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")
-google_key = os.getenv("AIzaSyAgrsVgr95fL3DjceZnkc0cn8LbzEkFcVE")
-google_cx = os.getenv("05c2e1a837ffb4411")
+
 GOOGLE = "google"
 USER = "user"
 ASSISTANT = "assistant"
@@ -99,23 +110,21 @@ class turn:
 
 # @retry(wait=wait_random_exponential(min=1, max=2), stop=(stop_after_delay(15) | stop_after_attempt(2)))
 def chatCompletion_with_backoff(**kwargs):
-    return openai.ChatCompletion.create(**kwargs)
+    return client.chat.completions.create(**kwargs)
 
 
 def ask_gpt(model, gpt_message, max_tokens, temp, top_p):
     completion = None
     try:
-        completion = openai.ChatCompletion.create(
-            model=model,
-            messages=gpt_message,
-            max_tokens=max_tokens,
-            temperature=temp,
-            top_p=top_p,
-        )
+        completion = client.chat.completions.create(model=model,
+        messages=gpt_message,
+        max_tokens=max_tokens,
+        temperature=temp,
+        top_p=top_p)
     except:
         traceback.print_exc()
     if completion is not None:
-        response = completion["choices"][0]["message"]["content"].lstrip(" ,:.")
+        response = completion.choices[0].message.content.lstrip(" ,:.")
         print(response)
         return response
     else:
@@ -258,7 +267,7 @@ def get_search_phrase_and_keywords(query_string, chat_history):
     #    print(role)
     # print()
     response_text = ask_gpt_with_retries(
-        "gpt-3.5-turbo", gpt_message, tokens=150, temp=0.3, timeout=6, tries=2
+        "gpt-4-1106-preview", gpt_message, tokens=150, temp=0.3, timeout=6, tries=2
     )
     print(response_text)
     query_phrase, remainder = find_query(response_text)
