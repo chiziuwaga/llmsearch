@@ -24,7 +24,7 @@ import tracemalloc
 
 history = {}
 
-llm_models = ["gpt-3.5-turbo", "gpt-4"]
+llm_models = ["gpt-4-1106-preview", "gpt-4-turbo-preview"]
 llm_model = llm_models[0]
 
 # initialize conversation
@@ -112,10 +112,10 @@ def illustrate(text):
         dalle_prompt = (
             "cartoon art " + img_completion["choices"][0]["message"]["content"]
         )
-        response = openai.Image.create(prompt=dalle_prompt, n=1, size="512x512")
+        response = client.images.generate(prompt=dalle_prompt, n=1, size="512x512")
         print(f"prompt:{dalle_prompt}")
-        print(response["data"][0]["url"])
-        webbrowser.get("google-chrome").open_new_tab(response["data"][0]["url"])
+        print(response.data[0].url)
+        webbrowser.get("google-chrome").open_new_tab(response.data[0].url)
 
 
 def run_chat(query_string, search_level=gs.QUICK_SEARCH):
