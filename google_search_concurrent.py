@@ -12,7 +12,7 @@ from urllib.request import urlopen
 from datetime import date
 from datetime import datetime
 import random
-import openai
+from dotenv import load_dotenv
 
 # from PyPDF2 import PdfReader
 import traceback
@@ -30,6 +30,8 @@ import wordfreq as wf
 from unstructured.partition.html import partition_html
 import nltk
 import urllib.parse as en
+from openai import OpenAI
+
 
 today = " as of " + date.today().strftime("%b-%d-%Y") + "\n\n"
 
@@ -274,14 +276,12 @@ def search(query_phrase):
     try:
         start_wall_time = time.time()
         url = (
-            "https://cse.google.com/cse?cx=05c2e1a837ffb4411"
-            + ut.google_key
-            + "&cx="
-            + ut.google_cx
+            "https://www.googleapis.com/customsearch/v1"
+            + "?key=AIzaSyDyhHEK3ovxLK23KpVAkRO4oEI5_bLuhG4"
+            + "&cx=05c2e1a837ffb4411"
             + "&num=10"
             + sort
-            + "&q="
-            + google_query
+            + "&q=" + google_query
         )
         response = requests.get(url)
         response_json = json.loads(response.text)
