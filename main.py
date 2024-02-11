@@ -6,6 +6,8 @@ import quart_cors
 from quart import request
 import google_search_concurrent as gs
 import requests
+import os
+from dotenv import load_dotenvf
 
 app = quart_cors.cors(quart.Quart(__name__), allow_origin="*")
 
